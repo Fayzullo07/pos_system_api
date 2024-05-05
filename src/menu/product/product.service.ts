@@ -11,8 +11,8 @@ export class ProductService {
     ) { }
 
     async findAll(category: string): Promise<Product[]> {
-        
-        const products = await this.productModel.find({ category });
+
+        const products = await this.productModel.find({ category, isActive: true });
         return products;
     }
 }
