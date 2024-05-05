@@ -20,7 +20,7 @@ export class CategoryController {
     }
 
     @Get(':id')
-    async getUser(
+    async getCategory(
         @Param('id')
         id: string
     ): Promise<Category> {

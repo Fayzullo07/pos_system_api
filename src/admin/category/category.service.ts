@@ -11,8 +11,8 @@ export class CategoryService {
     ) { }
 
     async findAll(): Promise<Category[]> {
-        const users = await this.categoryModel.find();
-        return users;
+        const categories = await this.categoryModel.find();
+        return categories;
     }
 
     async create(category: Category): Promise<Category> {
@@ -21,24 +21,14 @@ export class CategoryService {
             return res;
 
         } catch (error) {
-            // if (error.name === 'ValidationError') {
-            // Mongoose validation error
             throw new BadRequestException({
                 message: 'Validation failed',
                 errors: error,
             });
-            // }
-            // throw error; // Rethrow other errors
         }
     }
 
     async findById(id: string): Promise<Category> {
-        // if (id.length < 5) {
-        //     throw new BadRequestException({
-        //         message: 'Invalid ID length',
-        //         details: 'The provided ID is too short.',
-        //     });
-        // }
         try {
             const categories = await this.categoryModel.findById(id);
             if (categories) {
@@ -57,8 +47,8 @@ export class CategoryService {
         }
     }
 
-    async updateById(id: string, user: Category): Promise<Category> {
-        return await this.categoryModel.findByIdAndUpdate(id, user, {
+    async updateById(id: string, category: Category): Promise<Category> {
+        return await this.categoryModel.findByIdAndUpdate(id, category, {
             new: true,
             runValidators: true
         });
@@ -76,7 +66,6 @@ export class CategoryService {
                     details: `No category found with ID: ${id}`,
                 });
             }
-            return
         } catch (error) {
             throw new NotFoundException({
                 message: 'Category not found',
